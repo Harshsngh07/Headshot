@@ -16,6 +16,10 @@ const GlobalStyles = createGlobalStyle`
         &::--webkit--scrollbar:thumb{
             background-color: darkgrey;
         }
+     
+        &::-webkit-scrollbar-track {
+            background: white;
+        }
     }
 
     body{
@@ -32,7 +36,7 @@ const GlobalStyles = createGlobalStyle`
 
     h3{
         font-size: 1.3rem;
-        padding: 1.5rem;
+        padding: 1.5rem 0rem;
         color: #333;
     }
 
@@ -48,6 +52,9 @@ const GlobalStyles = createGlobalStyle`
         color: #333;
     }
 
+    img{
+        display:block;
+    }
 `;
 
 export default GlobalStyles;

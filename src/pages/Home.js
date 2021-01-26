@@ -2,10 +2,15 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadGames } from "../actions/gamesAction";
 import styled from "styled-components";
-import { motion } from "framer-motion";
 import Game from "../components/Game";
+import GameDetail from "../components/GameDetail";
+import { useLocation } from "react-router-dom";
+import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 const Home = () => {
+  //get location
+  const location = useLocation();
+  const pathID = location.pathname.split("/")[2];
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,6 +19,9 @@ const Home = () => {
   const { popular, newGames, upcoming } = useSelector((state) => state.games);
   return (
     <GameList>
+      <AnimateSharedLayout>
+        <AnimatePresence>{pathID && <GameDetail pathID={pathID} />}</AnimatePresence>
+      </AnimateSharedLayout>
       <h2>Upcoming Games</h2>
       <Games>
         {upcoming.map((game) => {
@@ -60,13 +68,13 @@ const Home = () => {
   );
 };
 
-const GameList = styled.div`
+const GameList = styled(motion.div)`
   padding: 0rem 5rem;
   h2 {
     padding: 5rem 0rem;
   }
 `;
-const Games = styled.div`
+const Games = styled(motion.div)`
   min-height: 80vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
