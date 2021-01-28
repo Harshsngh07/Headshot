@@ -5,6 +5,8 @@ import { loadDetails } from "../actions/detailsAction";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { smallImage } from "../util";
+import { popUp } from "../animations";
+
 export default function Game({ name, image, released, id }) {
   const stringPathID = id.toString();
   const dispatch = useDispatch();
@@ -13,7 +15,13 @@ export default function Game({ name, image, released, id }) {
     dispatch(loadDetails(id));
   };
   return (
-    <StyledGames layoutId={stringPathID} onClick={loadDetailHandler}>
+    <StyledGames
+      variants={popUp}
+      initial="hidden"
+      animate="show"
+      layoutId={stringPathID}
+      onClick={loadDetailHandler}
+    >
       <Link to={`/game/${id}`}>
         <motion.h3 layoutId={`title ${stringPathID}`}>{name}</motion.h3>
         <p>{released}</p>

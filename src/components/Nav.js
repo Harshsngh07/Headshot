@@ -1,19 +1,40 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import styled from "styled-components";
 import logo from "../img/pistol.png";
+import { fetchSearch } from "../actions/gamesAction";
+import { useDispatch } from "react-redux";
+import { fadeIn } from "../animations";
 
 const Nav = () => {
+  const dispatch = useDispatch();
+  const [textInput, setTextInput] = useState("");
+  const inputHandler = (e) => {
+    setTextInput(e.target.value);
+  };
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+    dispatch(fetchSearch(textInput));
+    setTextInput("");
+  };
+
+  const clearSearch = () => {
+    dispatch({
+      type: "CLEAR_SEARCH",
+    });
+  };
+
   return (
-    <StyledNav>
-      <Logo>
+    <StyledNav variants={fadeIn} initial="hidden" animate="show">
+      <Logo onClick={clearSearch}>
         <img src={logo} alt="logo" />
         <h1>Headshot</h1>
       </Logo>
-      <div className="search">
-        <input type="text" />
-        <button>Search</button>
-      </div>
+      <form className="search" onSubmit={submitSearch}>
+        <input value={textInput} onChange={inputHandler} type="text" />
+        <button type="submit">Search</button>
+      </form>
     </StyledNav>
   );
 };
