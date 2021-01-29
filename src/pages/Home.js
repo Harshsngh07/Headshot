@@ -46,7 +46,7 @@ const Home = () => {
       ) : (
         ""
       )}
-      <h2>Upcoming Games</h2>
+      <h2>Next Release</h2>
       <Games>
         {upcoming.map((game) => {
           return (
