@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { loadDetails } from "../actions/detailsAction";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { smallImage } from "../util";
+// import { smallImage } from "../util";
 import { popUp } from "../animations";
 
 export default function Game({ name, image, released, id }) {
@@ -25,11 +25,7 @@ export default function Game({ name, image, released, id }) {
       <Link to={`/game/${id}`}>
         <motion.h3 layoutId={`title ${stringPathID}`}>{name}</motion.h3>
         <p>{released}</p>
-        <motion.img
-          layoutId={`title ${stringPathID}`}
-          src={smallImage(image, 640)}
-          alt={name}
-        />
+        <motion.img layoutId={`title ${stringPathID}`} src={image} alt={name} />
       </Link>
     </StyledGames>
   );
